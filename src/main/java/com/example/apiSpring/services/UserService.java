@@ -1,6 +1,6 @@
 package com.example.apiSpring.services;
 
-import java.security.KeyStore.PasswordProtection;
+//import java.security.KeyStore.PasswordProtection;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,14 +60,14 @@ public class UserService {
             return null;
         }
     }
-    /*public UserModel updateUser(UserModel user, long id){
-        UserModel userOriginal = userRepository.findById(id)
-        .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.updateById(id, user);
-        return "update-user";
+    public UserModel updateUser(UserModel userUpdate){
+        //Optional<UserModel> user = userRepository.findById(id);
+        //user.get().setUsername(userUpdate.getUsername());
+        //user.get().setEmail(userUpdate.getEmail());
+        userRepository.save(userUpdate);
+        return userUpdate;
 
-
-    }*/
+    }
     private JavaMailSender javaMailSender;
     public MailModel sendEmail(MailModel mail){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();

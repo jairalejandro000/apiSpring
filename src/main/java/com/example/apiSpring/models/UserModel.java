@@ -9,10 +9,12 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
+    @Column(length = 255, unique = true, nullable = false)
     private String email;
+    @Column(length = 20, unique = false, nullable = false)
     private String username;
+    @Column(length = 20, unique = false, nullable = false)
     private String password;
 
 
