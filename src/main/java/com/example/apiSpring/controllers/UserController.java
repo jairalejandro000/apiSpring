@@ -47,14 +47,18 @@ public class UserController {
         return user;
     }
     //Nomas no jalo por sus huevotes
-    @PostMapping("/Prueba")
+    @GetMapping("/Prueba")
     public MailModel setEmail(){
         MailModel mail = new MailModel();
         mail.setFrom("jair.alejandro.mtz32@gmail.com");
         mail.setTo("jairalejandro32@outlook.com");
         mail.setSubject("Simple mail");
         mail.setText("Hey I'm a simple mail");
-        //userService.sendEmail(mail);
+        userService.sendEmail(mail);
         return mail;
+    }
+    @GetMapping("/encoder")
+    public String encode(){
+        return userService.pruebaEncode();
     }
 }
