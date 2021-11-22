@@ -13,15 +13,15 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
-
-    //PasswordEncoder passwordEncoder;
+    private UserRepository userRepository;
+    //private BCryptPasswordEncoder encoder;
 
     public ArrayList<UserModel> getUsers(){
         try{
@@ -41,9 +41,7 @@ public class UserService {
     }
     public UserModel createUser(UserModel user){
         try{
-            //passwordEncoder = new BCryptPasswordEncoder();
-            //String encodedPassword = passwordEncoder.encode(user.getPassword());
-            //user.setPassword(encodedPassword);
+            //user.setPassword(encoder.encode(user.getPassword()));
             return userRepository.save(user);
         }catch (Exception errorMessage){
             System.out.println(errorMessage);
@@ -60,11 +58,12 @@ public class UserService {
             return null;
         }
     }
-    public UserModel updateUser(UserModel userUpdate){
-        //Optional<UserModel> user = userRepository.findById(id);
-        //user.get().setUsername(userUpdate.getUsername());
-        //user.get().setEmail(userUpdate.getEmail());
-        userRepository.save(userUpdate);
+    public UserModel updateUser(UserModel userUpdate, long id){
+        Optional<UserModel> user = userRepository.findById(id);
+        user.get().setUsername(userUpdate.getUsername());
+        user.get().setEmail(userUpdate.getEmail());
+        user.get().getPassword();
+        userRepository.save(user.get());
         return userUpdate;
 
     }

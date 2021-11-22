@@ -35,9 +35,16 @@ public class UserController {
     public UserModel createUser(@RequestBody UserModel user){
         return this.userService.createUser(user);
     }
-    @DeleteMapping(path = "/Delete/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public Optional<UserModel> deleteUser(@PathVariable("id") long id){
-        return userService.deleteUser(id);
+        Optional<UserModel> userDeleted = userService.getUser(id);
+        userService.deleteUser(id);
+        return userDeleted;
+    }
+    @PutMapping(path = "/update/{id}")
+    public UserModel UpdateUser(@PathVariable("id") long id, @RequestBody UserModel user){
+        userService.updateUser(user, id);
+        return user;
     }
     //Nomas no jalo por sus huevotes
     @PostMapping("/Prueba")
@@ -49,10 +56,5 @@ public class UserController {
         mail.setText("Hey I'm a simple mail");
         //userService.sendEmail(mail);
         return mail;
-    }
-    @PutMapping(path = "/update")
-    public UserModel UpdateUser(@RequestBody UserModel user){
-        userService.updateUser(user);
-        return user;
     }
 }
